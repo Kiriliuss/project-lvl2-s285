@@ -1,4 +1,9 @@
-# Brain Games SK
+# Difference Calculator SK
+
+[![Code Climate](https://codeclimate.com/github/Kiriliuss/project-lvl2-s285/badges/gpa.svg)](https://codeclimate.com/github/Kiriliuss/project-lvl2-s285)
+[![Issue Count](https://codeclimate.com/github/Kiriliuss/project-lvl2-s285/badges/issue_count.svg)](https://codeclimate.com/github/Kiriliuss/project-lvl2-s285)
+[![Build Status](https://travis-ci.org/Kiriliuss/project-lvl1-s272.svg?branch=master)](https://travis-ci.org/Kiriliuss/project-lvl1-s272)
+
 
 ## Описание
 
