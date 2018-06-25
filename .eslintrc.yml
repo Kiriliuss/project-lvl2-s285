@@ -1,4 +1,5 @@
 plugins:
+  - jest
   - babel
 
 env:
