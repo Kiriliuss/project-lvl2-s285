@@ -1,6 +1,6 @@
 {
   "name": "difference-calculator-sk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "hexlet project 2 lvl",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
@@ -10,10 +10,13 @@
   ],
   "scripts": {
     "eslint": "eslint",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --colors",
     "babel-node": "babel-node",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
@@ -34,9 +37,12 @@
     "eslint": "^5.0.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-babel": "^5.1.0",
-    "eslint-plugin-import": "^2.13.0"
+    "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.1.0"
   },
   "dependencies": {
-    "commander": "^2.15.1"
+    "commander": "^2.15.1",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.10"
   }
 }
