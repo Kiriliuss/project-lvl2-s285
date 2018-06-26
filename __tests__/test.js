@@ -3,10 +3,10 @@ import path from 'path';
 import genDiff from '../src';
 
 const buildFixturePath = fileName => path.join(__dirname, '__fixtures__', fileName);
-const expectedDiffPath = buildFixturePath('expected');
-const fileExpected = fs.readFileSync(expectedDiffPath, 'utf-8').trim();
 
 describe('Test Difference Calculator!', () => {
+  const expectedDiffPath = buildFixturePath('expected');
+  const fileExpected = fs.readFileSync(expectedDiffPath, 'utf-8').trim();
   it('Two JSON', () => {
     const fixtures = ['before.json', 'after.json'];
     const [file1Path, file2Path] = fixtures.map(buildFixturePath);
