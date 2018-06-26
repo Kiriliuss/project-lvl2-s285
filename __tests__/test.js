@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import genDiff from '../src/genDiff';
+import genDiff from '../src';
 
 const buildFixturePath = fileName => path.join(__dirname, '__fixtures__', fileName);
 const expectedDiffPath = buildFixturePath('expected');
