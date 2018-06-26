@@ -22,4 +22,9 @@ describe('Test Difference Calculator!', () => {
     const [file1Path, file2Path] = fixtures.map(buildFixturePath);
     expect(genDiff(file1Path, file2Path)).toEqual(fileExpected);
   });
+  it('Two INI', () => {
+    const fixtures = ['before.ini', 'after.ini'];
+    const [file1Path, file2Path] = fixtures.map(buildFixturePath);
+    expect(genDiff(file1Path, file2Path)).toEqual(fileExpected);
+  });
 });
