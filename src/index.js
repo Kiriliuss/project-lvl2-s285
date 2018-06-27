@@ -1,7 +1,8 @@
-import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import parseOfExtType from './parser';
+import astBuild from './astBuilder';
+import render from './render';
 
 const parse = (pathToFile) => {
   const file = fs.readFileSync(pathToFile, 'utf-8');
@@ -11,18 +12,6 @@ const parse = (pathToFile) => {
 export default (pathToFile1, pathToFile2) => {
   const file1Parsed = parse(pathToFile1);
   const file2Parsed = parse(pathToFile2);
-  const unionKeys = _.union(_.keys(file1Parsed), _.keys(file2Parsed));
-  const result = unionKeys.map((key) => {
-    if (file1Parsed[key] === file2Parsed[key]) {
-      return `  ${key}: ${file1Parsed[key]}`;
-    }
-    if (_.has(file1Parsed, key) && !_.has(file2Parsed, key)) {
-      return `- ${key}: ${file1Parsed[key]}`;
-    }
-    if (!_.has(file1Parsed, key) && _.has(file2Parsed, key)) {
-      return `+ ${key}: ${file2Parsed[key]}`;
-    }
-    return `- ${key}: ${file1Parsed[key]}\n  + ${key}: ${file2Parsed[key]}`;
-  });
-  return `{\n  ${result.join('\n  ')}\n}`;
+  const ast = astBuild(file1Parsed, file2Parsed);
+  return render(ast);
 };
