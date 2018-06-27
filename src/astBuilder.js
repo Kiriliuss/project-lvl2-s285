@@ -2,41 +2,34 @@ import _ from 'lodash';
 
 const astTypes = [
   {
-    type: 'equal',
     check: (before, after, key) => (before[key] === after[key]),
-    value: (before, after, key) => before[key],
+    value: before => ({ type: 'equal', value: before }),
   },
   {
-    type: 'deleted',
     check: (before, after, key) => (_.has(before, key) && !_.has(after, key)),
-    value: (before, after, key) => before[key],
+    value: before => ({ type: 'deleted', value: before }),
   },
   {
-    type: 'added',
     check: (before, after, key) => (!_.has(before, key) && _.has(after, key)),
-    value: (before, after, key) => after[key],
+    value: (before, after) => ({ type: 'added', value: after }),
   },
   {
-    type: 'changed',
     check: (before, after, key) => ((_.has(before, key) && _.has(after, key))
-      && (before[key]) !== after[key])
-      && !(before[key] instanceof Object && after[key] instanceof Object),
-    value: (before, after, key) => ({ newValue: after[key], oldValue: before[key] }),
+      && (before[key]) !== after[key]) && !(_.isObject(before[key]) && _.isObject(after[key])),
+    value: (before, after) => ({ type: 'changed', newValue: after, oldValue: before }),
   },
   {
-    type: 'children',
     check: (before, after, key) => ((_.has(before, key) && _.has(after, key))
-      && (before[key] instanceof Object && after[key] instanceof Object)),
-    value: (before, after, key, func) => (func(before[key], after[key])),
+      && (_.isObject(before[key]) && _.isObject(after[key]))),
+    value: (before, after, func) => ({ type: 'children', value: func(before, after) }),
   },
 ];
-const astBild = (before, after) => {
+const astBuild = (before, after) => {
   const unionKeys = _.union(_.keys(before), _.keys(after));
   return unionKeys.map((key) => {
-    const [astNode] = astTypes.filter(el => el.check(before, after, key));
-    const { type, value } = astNode;
-    const astValue = value(before, after, key, astBild);
-    return { key, type, astValue };
+    const { value } = _.find(astTypes, type => type.check(before, after, key));
+    const astNode = value(before[key], after[key], astBuild);
+    return { ...astNode, key };
   });
 };
-export default astBild;
+export default astBuild;
