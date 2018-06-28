@@ -24,12 +24,12 @@ const astTypes = [
     value: (before, after, func) => ({ type: 'children', value: func(before, after) }),
   },
 ];
-const astBuild = (before, after) => {
+const buildAst = (before, after) => {
   const unionKeys = _.union(_.keys(before), _.keys(after));
   return unionKeys.map((key) => {
     const { value } = _.find(astTypes, type => type.check(before, after, key));
-    const astNode = value(before[key], after[key], astBuild);
+    const astNode = value(before[key], after[key], buildAst);
     return { ...astNode, key };
   });
 };
-export default astBuild;
+export default buildAst;
