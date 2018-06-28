@@ -5,4 +5,4 @@ const factoryRender = {
   tree: renderTree,
   plain: renderPlain,
 };
-export default (ast, type = 'tree') => factoryRender[type](ast);
+export default (ast, type) => factoryRender[type](ast);
