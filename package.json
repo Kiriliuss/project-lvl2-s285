@@ -1,6 +1,6 @@
 {
   "name": "difference-calculator-sk",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "hexlet project 2 lvl",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
